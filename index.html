@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ESTÚDIO PRO HUB</title>
+  <style>
+    :root {
+      --bg: #070b08;
+      --surface: #0e1510;
+      --surface-2: #141f17;
+      --border: #1e3324;
+      --neon: #22ff66;
+      --neon-soft: rgba(34, 255, 102, 0.14);
+      --neon-glow: 0 0 18px rgba(34, 255, 102, 0.28);
+      --text: #f2fff6;
+      --muted: #8ca694;
+      --accent-blue: #38bdf8;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(34, 255, 102, 0.08), transparent 45%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.45;
+      padding-bottom: 48px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    header {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: var(--neon-glow);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--neon);
+      text-shadow: 0 0 14px rgba(34, 255, 102, 0.35);
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 4px;
+    }
+
+    .pill {
+      background: var(--neon-soft);
+      color: var(--neon);
+      border: 1px solid rgba(34, 255, 102, 0.4);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .tabs {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .tab-btn {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: left;
+      transition: 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .tab-btn span.num {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .tab-btn:hover {
+      border-color: rgba(34, 255, 102, 0.5);
+    }
+
+    .tab-btn.active {
+      background: var(--neon-soft);
+      border-color: var(--neon);
+      color: var(--neon);
+      box-shadow: 0 0 14px rgba(34, 255, 102, 0.22);
+    }
+
+    .tab-btn.active span.num {
+      color: var(--neon);
+    }
+
+    .panel {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .panel-head {
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-head h2 {
+      font-size: 1.15rem;
+      color: var(--neon);
+    }
+
+    .panel-head p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 720px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #c7dfd0;
+      margin-bottom: 5px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      outline: none;
+      transition: 0.15s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--neon);
+      box-shadow: 0 0 0 2px rgba(34, 255, 102, 0.16);
+    }
+
+    textarea {
+      min-height: 82px;
+      resize: vertical;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    button.action {
+      background: var(--neon);
+      color: #051108;
+      border: none;
+      border-radius: 12px;
+      padding: 11px 16px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    button.action:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    button.secondary {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button.secondary:hover {
+      border-color: var(--neon);
+      color: var(--neon);
+    }
+
+    .output-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      white-space: pre-wrap;
+      font-size: 0.9rem;
+      color: var(--text);
+      min-height: 140px;
+    }
+
+    .preview-stage {
+      background: #050806;
+      border: 1px dashed rgba(34, 255, 102, 0.35);
+      border-radius: 16px;
+      padding: 24px 16px;
+      min-height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* 67 - Badge */
+    .badge-preview {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 1.05rem;
+      transition: 0.2s ease;
+    }
+
+    .badge-preview.style-neon {
+      background: rgba(34, 255, 102, 0.14);
+      color: var(--neon);
+      border: 2px solid var(--neon);
+      box-shadow: 0 0 22px rgba(34, 255, 102, 0.45);
+    }
+
+    .badge-preview.style-solid {
+      background: var(--neon);
+      color: #051108;
+      border: 2px solid var(--neon);
+      box-shadow: 0 0 18px rgba(34, 255, 102, 0.35);
+    }
+
+    .badge-preview.style-tag {
+      background: #131d16;
+      color: #ffffff;
+      border-left: 5px solid var(--neon);
+      border-radius: 10px;
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* 72 - Cartão de Visita */
+    .biz-card {
+      width: 100%;
+      max-width: 360px;
+      background: linear-gradient(145deg, #101a13, #080d09);
+      border: 1px solid rgba(34, 255, 102, 0.45);
+      border-radius: 20px;
+      padding: 22px;
+      text-align: left;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 18px rgba(34, 255, 102, 0.15);
+    }
+
+    .biz-role {
+      color: var(--neon);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .biz-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .biz-bio {
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin-top: 8px;
+    }
+
+    .biz-meta {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.84rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    /* 73 - Banner */
+    .banner-box {
+      width: 100%;
+      border-radius: 16px;
+      padding: 26px 20px;
+      text-align: left;
+      background: linear-gradient(120deg, #0d1a11 0%, #090e0b 65%, rgba(34, 255, 102, 0.16) 100%);
+      border: 1px solid rgba(34, 255, 102, 0.4);
+    }
+
+    .banner-kicker {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--neon);
+      margin-bottom: 6px;
+    }
+
+    .banner-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .banner-sub {
+      color: #b7cfc0;
+      font-size: 0.9rem;
+      margin-top: 8px;
+      max-width: 520px;
+    }
+
+    .banner-cta {
+      display: inline-block;
+      margin-top: 14px;
+      background: var(--neon);
+      color: #051108;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 9px 16px;
+      border-radius: 10px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--neon);
+      color: #051108;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 10px 18px;
+      border-radius: 999px;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.22s ease;
+      z-index: 999;
+      box-shadow: 0 6px 20px rgba(34, 255, 102, 0.35);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand-row">
+        <div>
+          <div class="brand-title">ESTÚDIO PRO HUB</div>
+          <div class="brand-sub">Central de criação, atendimento rápido e peças visuais</div>
+        </div>
+        <span class="pill">6 FERRAMENTAS</span>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Ferramentas do estúdio">
+      <button class="tab-btn active" data-tab="t42">
+        <span class="num">#42</span>
+        <span>Roteiro 30s / 60s</span>
+      </button>
+      <button class="tab-btn" data-tab="t46">
+        <span class="num">#46</span>
+        <span>Cobrança / Lembrete</span>
+      </button>
+      <button class="tab-btn" data-tab="t47">
+        <span class="num">#47</span>
+        <span>Resposta Rápida</span>
+      </button>
+      <button class="tab-btn" data-tab="t67">
+        <span class="num">#67</span>
+        <span>Gerador de Badge</span>
+      </button>
+      <button class="tab-btn" data-tab="t72">
+        <span class="num">#72</span>
+        <span>Cartão Digital</span>
+      </button>
+      <button class="tab-btn" data-tab="t73">
+        <span class="num">#73</span>
+        <span>Criador de Banner</span>
+      </button>
+    </nav>
+
+    <!-- 42: ROTEIRO CURTO -->
+    <section id="t42" class="panel active">
+      <div class="panel-head">
+        <h2>#42 • Gerador de Roteiro Curto (30s / 60s)</h2>
+        <p>Monte Gancho, Desenvolvimento e Chamada na hora para vídeos rápidos.</p>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="field">
+            <label for="r-duracao">Duração do vídeo</label>
+            <select id="r-duracao">
+              <option value="30s">30 segundos (direto ao ponto)</option>
+              <option value="60s">60 segundos (com exemplo e detalhe)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="r-tema">Tema / Assunto</label>
+            <input id="r-tema" type="text" placeholder="Ex.: como organizar entregas sem atrasar" value="como ganhar tempo no dia a dia" />
+          </div>
+          <div class="field">
+            <label for="r-cta">Chamada final (CTA)</label>
+            <input id="r-cta" type="text" placeholder="Ex.: salva o vídeo e comenta qual parte você mais usa" value="salva esse post e manda para quem precisa ver" />
+          </div>
+          <div class="btn-row">
+            <button class="action" onclick="gerarRoteiro()">Gerar roteiro</button>
+            <button class="secondary" onclick="copiarTexto('r-saida')">Copiar texto</button>
+          </div>
+        </div>
+        <div>
+          <label>Roteiro montado</label>
+          <div id="r-saida" class="output-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 46: COBRANÇA / LEMBRETE -->
+    <section id="t46" class="panel">
+      <div class="panel-head">
+        <h2>#46 • Gerador de Mensagem de Cobrança / Lembrete</h2>
+        <p>Crie lembretes educados ou diretos para retorno e pagamento.</p>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="field">
+            <label for="c-nome">Nome da pessoa / cliente</label>
+            <input id="c-nome" type="text" placeholder="Ex.: Lucas" value="Lucas" />
+          </div>
+          <div class="field">
+            <label for="c-ref">Referência / Serviço / Valor</label>
+            <input id="c-ref" type="text" placeholder="Ex.: entrega do pacote • R$ 120" value="pacote de edição • R$ 90" />
+          </div>
+          <div class="field">
+            <label for="c-tom">Tom da mensagem</label>
+            <select id="c-tom">
+              <option value="leve">Leve e amigável</option>
+              <option value="direto">Objetivo e direto</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="action" onclick="gerarCobranca()">Gerar mensagem</button>
+            <button class="secondary" onclick="copiarTexto('c-saida')">Copiar texto</button>
+          </div>
+        </div>
+        <div>
+          <label>Mensagem pronta</label>
+          <div id="c-saida" class="output-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 47: RESPOSTA RÁPIDA -->
+    <section id="t47" class="panel">
+      <div class="panel-head">
+        <h2>#47 • Gerador de Resposta Rápida para Clientes</h2>
+        <p>Respostas prontas para dúvidas comuns no atendimento.</p>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="field">
+            <label for="q-tipo">Tipo de dúvida</label>
+            <select id="q-tipo">
+              <option value="preco">Preço e condições</option>
+              <option value="agenda">Disponibilidade e agenda</option>
+              <option value="prazo">Prazo de entrega</option>
+              <option value="infos">Como fechar / próximos passos</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="q-detalhe">Detalhe principal</label>
+            <input id="q-detalhe" type="text" placeholder="Ex.: a partir de R$ 75 ou agenda aberta na sexta" value="a partir de R$ 80 com opção de parcelar no Pix" />
+          </div>
+          <div class="btn-row">
+            <button class="action" onclick="gerarResposta()">Montar resposta</button>
+            <button class="secondary" onclick="copiarTexto('q-saida')">Copiar texto</button>
+          </div>
+        </div>
+        <div>
+          <label>Resposta pronta</label>
+          <div id="q-saida" class="output-box"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 67: GERADOR DE BADGE -->
+    <section id="t67" class="panel">
+      <div class="panel-head">
+        <h2>#67 • Gerador de Badges / Selos Visuais</h2>
+        <p>Crie selos de destaque para artes, capas e apresentações.</p>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="field">
+            <label for="b-texto">Texto do selo</label>
+            <input id="b-texto" type="text" maxlength="24" value="DESTAQUE" oninput="renderBadge()" />
+          </div>
+          <div class="field">
+            <label for="b-estilo">Estilo visual</label>
+            <select id="b-estilo" onchange="renderBadge()">
+              <option value="style-neon">Borda Neon</option>
+              <option value="style-solid">Sólido Verde Neon</option>
+              <option value="style-tag">Tag Lateral</option>
+            </select>
+          </div>
+          <div class="btn-row">
+            <button class="secondary" onclick="copiarTexto('b-texto')">Copiar texto do selo</button>
+          </div>
+        </div>
+        <div>
+          <label>Prévia do selo</label>
+          <div class="preview-stage">
+            <div id="b-preview" class="badge-preview style-neon">DESTAQUE</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 72: CARTÃO DE VISITA DIGITAL -->
+    <section id="t72" class="panel">
+      <div class="panel-head">
+        <h2>#72 • Simulador de Cartão de Visita Digital</h2>
+        <p>Visualize seu cartão digital com nome, função, bio e contato.</p>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="field">
+            <label for="v-nome">Nome ou Marca</label>
+            <input id="v-nome" type="text" value="ESTÚDIO PRO HUB" oninput="renderCard()" />
+          </div>
+          <div class="field">
+            <label for="v-cargo">Área / Especialidade</label>
+            <input id="v-cargo" type="text" value="Criação • Produção • Projetos" oninput="renderCard()" />
+          </div>
+          <div class="field">
+            <label for="v-bio">Descrição curta</label>
+            <textarea id="v-bio" oninput="renderCard()">Soluções rápidas, atendimento direto e visual marcante para tirar ideias do papel.</textarea>
+          </div>
+          <div class="field">
+            <label for="v-contato">WhatsApp / Rede / Link</label>
+            <input id="v-contato" type="text" value="@estudioprohub • WhatsApp disponível" oninput="renderCard()" />
+          </div>
+        </div>
+        <div>
+          <label>Prévia do cartão</label>
+          <div class="preview-stage">
+            <div class="biz-card">
+              <div id="v-out-cargo" class="biz-role">CRIAÇÃO • PRODUÇÃO • PROJETOS</div>
+              <div id="v-out-nome" class="biz-name">ESTÚDIO PRO HUB</div>
+              <div id="v-out-bio" class="biz-bio">Soluções rápidas, atendimento direto e visual marcante para tirar ideias do papel.</div>
+              <div class="biz-meta">
+                <div id="v-out-contato">@estudioprohub • WhatsApp disponível</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 73: CRIADOR DE BANNER -->
+    <section id="t73" class="panel">
+      <div class="panel-head">
+        <h2>#73 • Criador de Banner / Cabeçalho Simples</h2>
+        <p>Monte uma faixa visual com etiqueta, título, subtítulo e botão.</p>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="field">
+            <label for="n-tag">Etiqueta superior</label>
+            <input id="n-tag" type="text" value="NOVO LANÇAMENTO" oninput="renderBanner()" />
+          </div>
+          <div class="field">
+            <label for="n-titulo">Título principal</label>
+            <input id="n-titulo" type="text" value="Tudo em um só lugar, sem complicação." oninput="renderBanner()" />
+          </div>
+          <div class="field">
+            <label for="n-sub">Subtítulo</label>
+            <input id="n-sub" type="text" value="Ferramentas práticas para criar, responder clientes e montar peças visuais rápido." oninput="renderBanner()" />
+          </div>
+          <div class="field">
+            <label for="n-btn">Texto do botão</label>
+            <input id="n-btn" type="text" value="Começar agora" oninput="renderBanner()" />
+          </div>
+        </div>
+        <div>
+          <label>Prévia do banner</label>
+          <div class="preview-stage">
+            <div class="banner-box">
+              <span id="n-out-tag" class="banner-kicker">NOVO LANÇAMENTO</span>
+              <div id="n-out-titulo" class="banner-title">Tudo em um só lugar, sem complicação.</div>
+              <p id="n-out-sub" class="banner-sub">Ferramentas práticas para criar, responder clientes e montar peças visuais rápido.</p>
+              <span id="n-out-btn" class="banner-cta">Começar agora</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast">Copiado!</div>
+
+  <script>
+    // Troca de abas
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-tab');
+        tabButtons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+
+    function mostrarToast(msg = 'Copiado!') {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    function copiarTexto(id) {
+      const el = document.getElementById(id);
+      const texto = el.value !== undefined ? el.value : el.innerText;
+      if (!texto.trim()) return;
+      navigator.clipboard.writeText(texto).then(() => mostrarToast('Copiado!'));
+    }
+
+    // #42 Roteiro
+    function gerarRoteiro() {
+      const dur = document.getElementById('r-duracao').value;
+      const tema = document.getElementById('r-tema').value.trim() || 'o tema do vídeo';
+      const cta = document.getElementById('r-cta').value.trim() || 'deixa seu comentário';
+
+      const texto = dur === '30s'
+        ? `[GANCHO - 0s a 5s]\nSe você quer resolver ${tema} sem enrolar, presta atenção nisso.\n\n[DESENVOLVIMENTO - 5s a 22s]\nO erro mais comum é tentar fazer tudo de uma vez. Separe o passo principal, execute de forma simples e mantenha o foco no que realmente gera resultado.\n\n[CHAMADA - 22s a 30s]\n${cta.charAt(0).toUpperCase() + cta.slice(1)}.`
+        : `[GANCHO - 0s a 6s]\nPouca gente fala sobre isso, mas ${tema} muda completamente o jogo.\n\n[DESENVOLVIMENTO - 6s a 45s]\n1) Comece definindo o objetivo exato daquele momento.\n2) Elimine distrações e etapas que só tomam tempo.\n3) Aplique na prática e ajuste só o que for necessário.\n\n[CHAMADA - 45s a 60s]\n${cta.charAt(0).toUpperCase() + cta.slice(1)}.`;
+
+      document.getElementById('r-saida').innerText = texto;
+    }
+
+    // #46 Cobrança / Lembrete
+    function gerarCobranca() {
+      const nome = document.getElementById('c-nome').value.trim() || 'tudo bem';
+      const ref = document.getElementById('c-ref').value.trim() || 'nosso combinado';
+      const tom = document.getElementById('c-tom').value;
+
+      const texto = tom === 'leve'
+        ? `Oi, ${nome}! Tudo certo por aí? Passando só para lembrar com carinho sobre ${ref}. Quando conseguir ver isso, me dá um toque por aqui. Valeu!`
+        : `Olá, ${nome}. Passando para lembrar do acerto referente a ${ref}. Segue disponível para confirmação e envio do comprovante quando você finalizar. Obrigado!`;
+
+      document.getElementById('c-saida').innerText = texto;
+    }
+
+    // #47 Resposta Rápida
+    function gerarResposta() {
+      const tipo = document.getElementById('q-tipo').value;
+      const detalhe = document.getElementById('q-detalhe').value.trim() || 'conforme sua necessidade';
+
+      const modelos = {
+        preco: `Oi! Sobre valores, fica ${detalhe}. Se quiser, me conta o que você precisa exatamente que eu te passo a opção mais encaixada.`,
+        agenda: `Oi! Sobre disponibilidade, estamos com ${detalhe}. Qual dia e horário ficam melhores para você?`,
+        prazo: `Oi! O prazo padrão é ${detalhe}, já contando com revisão para sair tudo certinho.`,
+        infos: `Oi! Para avançarmos, é bem simples: ${detalhe}. Qualquer dúvida é só chamar por aqui!`
+      };
+
+      document.getElementById('q-saida').innerText = modelos[tipo];
+    }
+
+    // #67 Badge
+    function renderBadge() {
+      const texto = document.getElementById('b-texto').value.trim() || 'SELO';
+      const estilo = document.getElementById('b-estilo').value;
+      const preview = document.getElementById('b-preview');
+      preview.className = `badge-preview ${estilo}`;
+      preview.textContent = texto;
+    }
+
+    // #72 Cartão
+    function renderCard() {
+      document.getElementById('v-out-nome').textContent = document.getElementById('v-nome').value.trim() || 'ESTÚDIO PRO HUB';
+      document.getElementById('v-out-cargo').textContent = document.getElementById('v-cargo').value.trim() || 'ESPECIALIDADE';
+      document.getElementById('v-out-bio').textContent = document.getElementById('v-bio').value.trim() || '';
+      document.getElementById('v-out-contato').textContent = document.getElementById('v-contato').value.trim() || '';
+    }
+
+    // #73 Banner
+    function renderBanner() {
+      document.getElementById('n-out-tag').textContent = document.getElementById('n-tag').value.trim() || 'DESTAQUE';
+      document.getElementById('n-out-titulo').textContent = document.getElementById('n-titulo').value.trim() || 'Título do banner';
+      document.getElementById('n-out-sub').textContent = document.getElementById('n-sub').value.trim() || '';
+      document.getElementById('n-out-btn').textContent = document.getElementById('n-btn').value.trim() || 'Saiba mais';
+    }
+
+    // Inicializa conteúdos padrão
+    gerarRoteiro();
+    gerarCobranca();
+    gerarResposta();
+    renderBadge();
+    renderCard();
+    renderBanner();
+  </script>
+</body>
+</html>

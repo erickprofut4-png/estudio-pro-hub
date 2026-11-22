@@ -95,7 +95,7 @@
 
     @media (min-width: 640px) {
       .tabs {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
     }
 
@@ -432,7 +432,7 @@
           <div class="brand-title">ESTÚDIO PRO HUB</div>
           <div class="brand-sub">Central de criação, atendimento rápido e peças visuais</div>
         </div>
-        <span class="pill">6 FERRAMENTAS</span>
+        <span class="pill">7 FERRAMENTAS</span>
       </div>
     </header>
 
@@ -448,6 +448,10 @@
       <button class="tab-btn" data-tab="t47">
         <span class="num">#47</span>
         <span>Resposta Rápida</span>
+      </button>
+      <button class="tab-btn" data-tab="t63">
+        <span class="num">#63</span>
+        <span>Roteiro Entrevista</span>
       </button>
       <button class="tab-btn" data-tab="t67">
         <span class="num">#67</span>
@@ -545,245 +549,4 @@
             <label for="q-tipo">Tipo de dúvida</label>
             <select id="q-tipo">
               <option value="preco">Preço e condições</option>
-              <option value="agenda">Disponibilidade e agenda</option>
-              <option value="prazo">Prazo de entrega</option>
-              <option value="infos">Como fechar / próximos passos</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="q-detalhe">Detalhe principal</label>
-            <input id="q-detalhe" type="text" placeholder="Ex.: a partir de R$ 75 ou agenda aberta na sexta" value="a partir de R$ 80 com opção de parcelar no Pix" />
-          </div>
-          <div class="btn-row">
-            <button class="action" onclick="gerarResposta()">Montar resposta</button>
-            <button class="secondary" onclick="copiarTexto('q-saida')">Copiar texto</button>
-          </div>
-        </div>
-        <div>
-          <label>Resposta pronta</label>
-          <div id="q-saida" class="output-box"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 67: GERADOR DE BADGE -->
-    <section id="t67" class="panel">
-      <div class="panel-head">
-        <h2>#67 • Gerador de Badges / Selos Visuais</h2>
-        <p>Crie selos de destaque para artes, capas e apresentações.</p>
-      </div>
-      <div class="grid-2">
-        <div>
-          <div class="field">
-            <label for="b-texto">Texto do selo</label>
-            <input id="b-texto" type="text" maxlength="24" value="DESTAQUE" oninput="renderBadge()" />
-          </div>
-          <div class="field">
-            <label for="b-estilo">Estilo visual</label>
-            <select id="b-estilo" onchange="renderBadge()">
-              <option value="style-neon">Borda Neon</option>
-              <option value="style-solid">Sólido Verde Neon</option>
-              <option value="style-tag">Tag Lateral</option>
-            </select>
-          </div>
-          <div class="btn-row">
-            <button class="secondary" onclick="copiarTexto('b-texto')">Copiar texto do selo</button>
-          </div>
-        </div>
-        <div>
-          <label>Prévia do selo</label>
-          <div class="preview-stage">
-            <div id="b-preview" class="badge-preview style-neon">DESTAQUE</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 72: CARTÃO DE VISITA DIGITAL -->
-    <section id="t72" class="panel">
-      <div class="panel-head">
-        <h2>#72 • Simulador de Cartão de Visita Digital</h2>
-        <p>Visualize seu cartão digital com nome, função, bio e contato.</p>
-      </div>
-      <div class="grid-2">
-        <div>
-          <div class="field">
-            <label for="v-nome">Nome ou Marca</label>
-            <input id="v-nome" type="text" value="ESTÚDIO PRO HUB" oninput="renderCard()" />
-          </div>
-          <div class="field">
-            <label for="v-cargo">Área / Especialidade</label>
-            <input id="v-cargo" type="text" value="Criação • Produção • Projetos" oninput="renderCard()" />
-          </div>
-          <div class="field">
-            <label for="v-bio">Descrição curta</label>
-            <textarea id="v-bio" oninput="renderCard()">Soluções rápidas, atendimento direto e visual marcante para tirar ideias do papel.</textarea>
-          </div>
-          <div class="field">
-            <label for="v-contato">WhatsApp / Rede / Link</label>
-            <input id="v-contato" type="text" value="@estudioprohub • WhatsApp disponível" oninput="renderCard()" />
-          </div>
-        </div>
-        <div>
-          <label>Prévia do cartão</label>
-          <div class="preview-stage">
-            <div class="biz-card">
-              <div id="v-out-cargo" class="biz-role">CRIAÇÃO • PRODUÇÃO • PROJETOS</div>
-              <div id="v-out-nome" class="biz-name">ESTÚDIO PRO HUB</div>
-              <div id="v-out-bio" class="biz-bio">Soluções rápidas, atendimento direto e visual marcante para tirar ideias do papel.</div>
-              <div class="biz-meta">
-                <div id="v-out-contato">@estudioprohub • WhatsApp disponível</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 73: CRIADOR DE BANNER -->
-    <section id="t73" class="panel">
-      <div class="panel-head">
-        <h2>#73 • Criador de Banner / Cabeçalho Simples</h2>
-        <p>Monte uma faixa visual com etiqueta, título, subtítulo e botão.</p>
-      </div>
-      <div class="grid-2">
-        <div>
-          <div class="field">
-            <label for="n-tag">Etiqueta superior</label>
-            <input id="n-tag" type="text" value="NOVO LANÇAMENTO" oninput="renderBanner()" />
-          </div>
-          <div class="field">
-            <label for="n-titulo">Título principal</label>
-            <input id="n-titulo" type="text" value="Tudo em um só lugar, sem complicação." oninput="renderBanner()" />
-          </div>
-          <div class="field">
-            <label for="n-sub">Subtítulo</label>
-            <input id="n-sub" type="text" value="Ferramentas práticas para criar, responder clientes e montar peças visuais rápido." oninput="renderBanner()" />
-          </div>
-          <div class="field">
-            <label for="n-btn">Texto do botão</label>
-            <input id="n-btn" type="text" value="Começar agora" oninput="renderBanner()" />
-          </div>
-        </div>
-        <div>
-          <label>Prévia do banner</label>
-          <div class="preview-stage">
-            <div class="banner-box">
-              <span id="n-out-tag" class="banner-kicker">NOVO LANÇAMENTO</span>
-              <div id="n-out-titulo" class="banner-title">Tudo em um só lugar, sem complicação.</div>
-              <p id="n-out-sub" class="banner-sub">Ferramentas práticas para criar, responder clientes e montar peças visuais rápido.</p>
-              <span id="n-out-btn" class="banner-cta">Começar agora</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <div id="toast" class="toast">Copiado!</div>
-
-  <script>
-    // Troca de abas
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const panels = document.querySelectorAll('.panel');
-
-    tabButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.getAttribute('data-tab');
-        tabButtons.forEach(b => b.classList.remove('active'));
-        panels.forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(target).classList.add('active');
-      });
-    });
-
-    function mostrarToast(msg = 'Copiado!') {
-      const toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 1800);
-    }
-
-    function copiarTexto(id) {
-      const el = document.getElementById(id);
-      const texto = el.value !== undefined ? el.value : el.innerText;
-      if (!texto.trim()) return;
-      navigator.clipboard.writeText(texto).then(() => mostrarToast('Copiado!'));
-    }
-
-    // #42 Roteiro
-    function gerarRoteiro() {
-      const dur = document.getElementById('r-duracao').value;
-      const tema = document.getElementById('r-tema').value.trim() || 'o tema do vídeo';
-      const cta = document.getElementById('r-cta').value.trim() || 'deixa seu comentário';
-
-      const texto = dur === '30s'
-        ? `[GANCHO - 0s a 5s]\nSe você quer resolver ${tema} sem enrolar, presta atenção nisso.\n\n[DESENVOLVIMENTO - 5s a 22s]\nO erro mais comum é tentar fazer tudo de uma vez. Separe o passo principal, execute de forma simples e mantenha o foco no que realmente gera resultado.\n\n[CHAMADA - 22s a 30s]\n${cta.charAt(0).toUpperCase() + cta.slice(1)}.`
-        : `[GANCHO - 0s a 6s]\nPouca gente fala sobre isso, mas ${tema} muda completamente o jogo.\n\n[DESENVOLVIMENTO - 6s a 45s]\n1) Comece definindo o objetivo exato daquele momento.\n2) Elimine distrações e etapas que só tomam tempo.\n3) Aplique na prática e ajuste só o que for necessário.\n\n[CHAMADA - 45s a 60s]\n${cta.charAt(0).toUpperCase() + cta.slice(1)}.`;
-
-      document.getElementById('r-saida').innerText = texto;
-    }
-
-    // #46 Cobrança / Lembrete
-    function gerarCobranca() {
-      const nome = document.getElementById('c-nome').value.trim() || 'tudo bem';
-      const ref = document.getElementById('c-ref').value.trim() || 'nosso combinado';
-      const tom = document.getElementById('c-tom').value;
-
-      const texto = tom === 'leve'
-        ? `Oi, ${nome}! Tudo certo por aí? Passando só para lembrar com carinho sobre ${ref}. Quando conseguir ver isso, me dá um toque por aqui. Valeu!`
-        : `Olá, ${nome}. Passando para lembrar do acerto referente a ${ref}. Segue disponível para confirmação e envio do comprovante quando você finalizar. Obrigado!`;
-
-      document.getElementById('c-saida').innerText = texto;
-    }
-
-    // #47 Resposta Rápida
-    function gerarResposta() {
-      const tipo = document.getElementById('q-tipo').value;
-      const detalhe = document.getElementById('q-detalhe').value.trim() || 'conforme sua necessidade';
-
-      const modelos = {
-        preco: `Oi! Sobre valores, fica ${detalhe}. Se quiser, me conta o que você precisa exatamente que eu te passo a opção mais encaixada.`,
-        agenda: `Oi! Sobre disponibilidade, estamos com ${detalhe}. Qual dia e horário ficam melhores para você?`,
-        prazo: `Oi! O prazo padrão é ${detalhe}, já contando com revisão para sair tudo certinho.`,
-        infos: `Oi! Para avançarmos, é bem simples: ${detalhe}. Qualquer dúvida é só chamar por aqui!`
-      };
-
-      document.getElementById('q-saida').innerText = modelos[tipo];
-    }
-
-    // #67 Badge
-    function renderBadge() {
-      const texto = document.getElementById('b-texto').value.trim() || 'SELO';
-      const estilo = document.getElementById('b-estilo').value;
-      const preview = document.getElementById('b-preview');
-      preview.className = `badge-preview ${estilo}`;
-      preview.textContent = texto;
-    }
-
-    // #72 Cartão
-    function renderCard() {
-      document.getElementById('v-out-nome').textContent = document.getElementById('v-nome').value.trim() || 'ESTÚDIO PRO HUB';
-      document.getElementById('v-out-cargo').textContent = document.getElementById('v-cargo').value.trim() || 'ESPECIALIDADE';
-      document.getElementById('v-out-bio').textContent = document.getElementById('v-bio').value.trim() || '';
-      document.getElementById('v-out-contato').textContent = document.getElementById('v-contato').value.trim() || '';
-    }
-
-    // #73 Banner
-    function renderBanner() {
-      document.getElementById('n-out-tag').textContent = document.getElementById('n-tag').value.trim() || 'DESTAQUE';
-      document.getElementById('n-out-titulo').textContent = document.getElementById('n-titulo').value.trim() || 'Título do banner';
-      document.getElementById('n-out-sub').textContent = document.getElementById('n-sub').value.trim() || '';
-      document.getElementById('n-out-btn').textContent = document.getElementById('n-btn').value.trim() || 'Saiba mais';
-    }
-
-    // Inicializa conteúdos padrão
-    gerarRoteiro();
-    gerarCobranca();
-    gerarResposta();
-    renderBadge();
-    renderCard();
-    renderBanner();
-  </script>
-</body>
-</html>
+              <option value="agenda">Disponibilidade e
